@@ -1,0 +1,149 @@
+@import '../general';
+@import '../normalize-partials/button';
+
+:host {
+	@include z2();
+	border-radius: 10px;
+	background:$white;
+	contain: content;
+	cursor: pointer;
+	display: inline-block;
+	padding: 6px 14px;
+	transition: box-shadow 0.1s;
+	appearance: none;
+}
+
+/*Basic button properties*/
+button {
+	border: 0px;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 14px;
+
+	&:focus {
+	  outline-color: $white;
+	  outline-style: dashed;
+	  outline-width: 1px;
+	}
+}
+
+/*PRIMARY BUTTON STYLES*/
+
+:host([primary]) {
+	background: $primary;
+	border: 4px solid $primary-100;
+	@include z2();
+}
+
+:host([primary]) button {
+	background: $primary;
+}
+
+@media screen and (min-width: $break-medium) {
+	/* Only do hover on desktop since mobile devices don't support hover.*/
+	:host([primary]:hover) {
+		@include z4();
+	}
+}
+
+:host([primary]:active) {
+	@include z0();
+}
+
+:host([primary][disabled]) {
+	background: $primary-200;
+	border: 4px solid $primary-200;
+	@include z0();
+	pointer-events: none;
+	cursor:not-allowed;
+}
+
+:host([primary][disabled]) button {
+	background: $primary-200;
+	outline:none;
+	cursor:not-allowed;
+	color: $disabled-font;
+	pointer-events: none;
+}
+
+
+/*SECONDARY BUTTON STYLES */
+:host([secondary]) {
+	background: $secondary;
+	border: 4px solid $secondary;
+	@include z1();
+}
+
+:host([secondary]) button {
+	background: $secondary;
+}
+
+@media screen and (min-width: $break-medium) {
+	/* Only do hover on desktop since mobile devices don't support hover.*/
+	:host([secondary]:hover) {
+		@include z2();
+	}
+}
+
+:host([secondary]:active) {
+	@include z0();
+}
+
+:host([secondary][disabled]) {
+	background: $secondary-200;
+	border: 4px solid $secondary-200;
+	@include z0();
+	pointer-events: none;
+	cursor:not-allowed;
+}
+
+:host([secondary][disabled]) button {
+	background: $secondary-200;
+	outline:none;
+	cursor:not-allowed;
+	color: $disabled-font;
+	pointer-events: none;
+}
+
+/*BIG SECONDARY BUTTON STYLES */
+:host([secondary][big]) {
+	background: $secondary;
+	border: 4px solid $secondary;
+	@include z1();
+	padding: 14px 14px;
+}
+
+:host([secondary][big]) button {
+	background: $secondary;
+	font-size: 18px;
+}
+
+@media screen and (min-width: $break-medium) {
+	/* Only do hover on desktop since mobile devices don't support hover.*/
+	:host([secondary][big]:hover) {
+		@include z2();
+	}
+}
+
+:host([secondary][big]:active) {
+	@include z0();
+}
+
+:host([secondary][big][disabled]) {
+	background: $secondary-200;
+	border: 4px solid $secondary-200;
+	@include z0();
+	pointer-events: none;
+	cursor:not-allowed;
+}
+
+:host([secondary][big][disabled]) button {
+	background: $secondary-200;
+	outline:none;
+	cursor:not-allowed;
+	color: $disabled-font;
+	pointer-events: none;
+}
+
+

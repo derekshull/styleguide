@@ -1,0 +1,15 @@
+@import './general';
+@import './normalize';
+
+html, body {
+	height: 100%;
+}
+
+header {
+	background: $primary;
+	padding: 20px;
+}
+
+section {
+	padding: 20px;
+}

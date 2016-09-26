@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	   <meta charset="UTF-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1">
+	   <title>To Do List with Native Web Components</title>
+	   <link rel="stylesheet" type="text/css" href="./dist/styles.css">
+	</head>
+	<body>
+		<div class="header">
+			<button class="js-menu-show header__menu-toggle material-icons">menu</button>
+		</div>
+
+		<aside class="js-side-nav side-nav">
+			<nav class="js-side-nav-container side-nav__container">
+				<button class="js-menu-hide side-nav__hide material-icons">close</button>
+				<header class="side-nav__header">
+					Side Nav
+				</header>
+				<ul class="side-nav__content">
+					<li>One</li>
+					<li>Two</li>
+					<li>Three</li>
+					<li>Four</li>
+				</ul>
+			</nav>
+		</aside>
+
+		<script defer="defer" src="./dist/webcomponents.min.js"></script>
+		<script defer="defer" src="./dist/components.js"></script>
+		<script defer="defer" src="./dist/app.js" type="text/javascript"></script> 
+	</body> 
+</html>
