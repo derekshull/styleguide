@@ -76,89 +76,236 @@ var arisButton = function (_HTMLElement) {
 
 var myArisButton = document.registerElement("aris-button", arisButton);
 
-var todoInput = function (_HTMLElement2) {
-  _inherits(todoInput, _HTMLElement2);
+var SCView = function (_HTMLElement2) {
+  _inherits(SCView, _HTMLElement2);
 
-  function todoInput() {
-    _classCallCheck(this, todoInput);
+  function SCView() {
+    _classCallCheck(this, SCView);
 
-    return _possibleConstructorReturn(this, (todoInput.__proto__ || Object.getPrototypeOf(todoInput)).call(this));
+    return _possibleConstructorReturn(this, (SCView.__proto__ || Object.getPrototypeOf(SCView)).apply(this, arguments));
   }
 
-  _createClass(todoInput, [{
+  _createClass(SCView, [{
     key: 'createdCallback',
     value: function createdCallback() {
+      this._spinnerTimeout = undefined;
+      this._view = null;
+      this._isRemote = this.getAttribute('remote') !== null;
+    }
+  }, {
+    key: '_hideSpinner',
+    value: function _hideSpinner() {
+      this.classList.remove('pending');
+    }
+  }, {
+    key: '_showSpinner',
+    value: function _showSpinner() {
+      this.classList.add('pending');
+    }
+  }, {
+    key: '_loadView',
+    value: function _loadView(data) {
       var _this3 = this;
 
-      this.createShadowRoot().innerHTML = '\n      \t\t<style>\ninput {\n  color: inherit;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n  margin: 0;\n  /* 3 */\n  line-height: normal; }\n\nhtml input[type="button"],\ninput[type="reset"],\ninput[type="submit"] {\n  -webkit-appearance: button;\n  /* 2 */\n  cursor: pointer;\n  /* 3 */ }\n\nhtml input[disabled] {\n  cursor: default; }\n\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0; }\n\ninput[type="checkbox"],\ninput[type="radio"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */ }\n\ninput[type="number"]::-webkit-inner-spin-button,\ninput[type="number"]::-webkit-outer-spin-button {\n  height: auto; }\n\ninput[type="search"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  box-sizing: content-box;\n  /* 2 */ }\n\ninput[type="search"]::-webkit-search-cancel-button,\ninput[type="search"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n\n</style>\n      \t\t<p>\n\t\t\t\t<input type="text" id="todoText" autofocus> <aris-button secondary>Send</aris-button>\n\t\t\t</p>\n    \t';
-      var input = this.shadowRoot.querySelector('input');
-      var btn = this.shadowRoot.querySelector('aris-button');
-      btn.addEventListener('click', function () {
-        return _this3.updateList(input);
+      // Wait for half a second then show the spinner.
+      var spinnerTimeout = setTimeout(function (_) {
+        return _this3._showSpinner();
+      }, 500);
+
+      this._view = new DocumentFragment();
+      var xhr = new XMLHttpRequest();
+
+      xhr.onload = function (evt) {
+        var newDoc = evt.target.response;
+        var newView = newDoc.querySelector('sc-view.visible');
+
+        // Copy in the child nodes from the parent.
+        newView.childNodes.forEach(function (node) {
+          _this3._view.appendChild(node);
+        });
+
+        // Add the fragment to the page.
+        _this3.appendChild(_this3._view);
+
+        // Clear the timeout and remove the spinner if needed.
+        clearTimeout(spinnerTimeout);
+        _this3._hideSpinner();
+      };
+      xhr.responseType = 'document';
+      xhr.open('GET', '' + data[0]);
+      xhr.send();
+    }
+  }, {
+    key: 'in',
+    value: function _in(data) {
+      var _this4 = this;
+
+      if (this._isRemote && !this._view) {
+        this._loadView(data);
+      }
+
+      return new Promise(function (resolve, reject) {
+        var onTransitionEnd = function onTransitionEnd() {
+          _this4.removeEventListener('transitionend', onTransitionEnd);
+          resolve();
+        };
+
+        _this4.classList.add('visible');
+        _this4.addEventListener('transitionend', onTransitionEnd);
       });
     }
   }, {
-    key: 'attachedCallback',
-    value: function attachedCallback() {
-      if (window.WebComponents && WebComponents.ShadowCSS) {
-        WebComponents.ShadowCSS.shimStyling(this.shadowRoot, 'todo-input');
-      }
+    key: 'out',
+    value: function out() {
+      var _this5 = this;
+
+      return new Promise(function (resolve, reject) {
+        var onTransitionEnd = function onTransitionEnd() {
+          _this5.removeEventListener('transitionend', onTransitionEnd);
+          resolve();
+        };
+
+        _this5.classList.remove('visible');
+        _this5.addEventListener('transitionend', onTransitionEnd);
+      });
     }
   }, {
-    key: 'updateList',
-    value: function updateList(input) {
-      document.querySelector("todo-list").setAttribute("json", '[{"id": 0, "name": "' + input.value + '"}]');
-      input.value = "";
+    key: 'update',
+    value: function update() {
+      return Promise.resolve();
+    }
+  }, {
+    key: 'route',
+    get: function get() {
+      return this.getAttribute('route') || null;
     }
   }]);
 
-  return todoInput;
+  return SCView;
 }(HTMLElement);
 
-var myTodoInput = document.registerElement("todo-input", todoInput);
+document.registerElement('sc-view', SCView);
 
-var todoList = function (_HTMLElement3) {
-  _inherits(todoList, _HTMLElement3);
+var SCRouter = function (_HTMLElement3) {
+  _inherits(SCRouter, _HTMLElement3);
 
-  function todoList() {
-    _classCallCheck(this, todoList);
+  function SCRouter() {
+    _classCallCheck(this, SCRouter);
 
-    return _possibleConstructorReturn(this, (todoList.__proto__ || Object.getPrototypeOf(todoList)).call(this));
+    return _possibleConstructorReturn(this, (SCRouter.__proto__ || Object.getPrototypeOf(SCRouter)).apply(this, arguments));
   }
 
-  _createClass(todoList, [{
+  _createClass(SCRouter, [{
+    key: '_onChanged',
+    value: function _onChanged() {
+      var _this7 = this;
+
+      var path = window.location.pathname;
+      var routes = Array.from(this._routes.keys());
+      var route = routes.find(function (r) {
+        return r.test(path);
+      });
+      var data = route.exec(path);
+
+      if (!route) {
+        return;
+      }
+
+      // Store the new view.
+      this._newView = this._routes.get(route);
+
+      // We don't want to create more promises for the outgoing view animation,
+      // because then we get a lot of hanging Promises, so we add a boolean gate
+      // here to stop if there's already a transition running.
+      if (this._isTransitioningBetweenViews) {
+        return Promise.resolve();
+      }
+      this._isTransitioningBetweenViews = true;
+
+      // Assume that there's no outgoing animation required.
+      var outViewPromise = Promise.resolve();
+
+      // If there is a current view...
+      if (this._currentView) {
+        // ...and it's the one we already have, just update it.
+        if (this._currentView === this._newView) {
+          // No transitions, so remove the boolean gate.
+          this._isTransitioningBetweenViews = false;
+
+          return this._currentView.update(data);
+        }
+
+        // Otherwise animate it out, and take the Promise made by the view as an
+        // indicator that the view is done.
+        outViewPromise = this._currentView.out(data);
+      }
+
+      // Whenever the outgoing animation is done (which may be immediately if
+      // there isn't one), update the references to the current view, allow
+      // outgoing animations to proceed.
+      return outViewPromise.then(function (_) {
+        _this7._currentView = _this7._newView;
+        _this7._isTransitioningBetweenViews = false;
+        return _this7._newView.in(data);
+      });
+    }
+  }, {
+    key: 'go',
+    value: function go(url) {
+      window.history.pushState(null, null, url);
+      return this._onChanged();
+    }
+  }, {
+    key: 'addRoute',
+    value: function addRoute(route, view) {
+      if (this._routes.has(route)) return console.warn('Route already exists: ' + route);
+
+      this._routes.set(route, view);
+    }
+  }, {
+    key: '_addRoutes',
+    value: function _addRoutes() {
+      var _this8 = this;
+
+      var views = Array.from(document.querySelectorAll('sc-view'));
+      views.forEach(function (view) {
+        if (!view.route) return;
+
+        _this8.addRoute(new RegExp(view.route, 'i'), view);
+      }, this);
+    }
+  }, {
+    key: '_removeRoute',
+    value: function _removeRoute(route) {
+      this._routes.delete(route);
+    }
+  }, {
+    key: '_clearRoutes',
+    value: function _clearRoutes() {
+      this._routes.clear();
+    }
+  }, {
     key: 'createdCallback',
     value: function createdCallback() {
-      this.innerHTML = '\n\t\t\t<p>\n\t\t\t\tThe List:\n\t\t\t\t<div id="todoListItems"></div>\n\t\t\t</p>\n\t\t';
+      this._onChanged = this._onChanged.bind(this);
+      this._routes = new Map();
     }
   }, {
     key: 'attachedCallback',
     value: function attachedCallback() {
-      if (window.WebComponents && WebComponents.ShadowCSS) {
-        WebComponents.ShadowCSS.shimStyling(this.shadowRoot, 'todo-list');
-      }
+      window.addEventListener('popstate', this._onChanged);
+      this._clearRoutes();
+      this._addRoutes();
+      this._onChanged();
     }
   }, {
-    key: 'attributeChangedCallback',
-    value: function attributeChangedCallback(json, oldValue, newValue) {
-      var items = JSON.parse(newValue);
-
-      if (!oldValue) {
-        for (var i in items) {
-          this.querySelector('#todoListItems').innerHTML += '\n\t\t\t\t\t<div class="todoItem">\n\t\t\t\t\t\t' + items[i].name + '\n\t\t\t\t\t\t<button class="complete">Complete</button>\n\t\t\t\t\t\t<button class="remove">Remove</button>\n\t\t\t\t\t</div>\n\t\t\t\t';
-        }
-      } else {
-        var todoListItems = this.querySelector('#todoListItems');
-        for (var i in items) {
-          var theKid = document.createElement("div");
-          theKid.innerHTML = '\n\t\t\t\t\t<div class="todoItem">\n\t\t\t\t\t\t' + items[i].name + '\n\t\t\t\t\t\t<button class="complete">Complete</button>\n\t\t\t\t\t\t<button class="remove">Remove</button>\n\t\t\t\t\t</div>\n\t\t\t\t';
-          todoListItems.insertBefore(theKid, todoListItems.firstChild);
-        }
-      }
+    key: 'detachedCallback',
+    value: function detachedCallback() {
+      window.removeEventListener('popstate', this._onChanged);
     }
   }]);
 
-  return todoList;
+  return SCRouter;
 }(HTMLElement);
 
-var myTodoList = document.registerElement("todo-list", todoList);
+document.registerElement('sc-router', SCRouter);

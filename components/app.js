@@ -1,11 +1,81 @@
 'use strict';
 
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
+class App {
+  constructor () {
+    const router = document.querySelector('sc-router');
+    const links = Array.from(document.querySelectorAll('a'));
+
+    function onClick (evt) {
+      evt.preventDefault();
+      router.go(evt.target.href);
+    }
+
+    links.forEach(link => {
+      link.addEventListener('click', onClick);
+    });
+  }
+}
+
+(_ => new App())();
+
+class Detabinator {
+  	constructor(element) {
+		if (!element) {
+		  	throw new Error('Missing required argument. new Detabinator needs an element reference');
+		}
+		this._inert = false;
+		this._focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], [contenteditable]';
+		this._focusableElements = Array.from(
+		  	element.querySelectorAll(this._focusableElementsString)
+		);
+  	}
+
+  	get inert() {
+		return this._inert;
+  	}
+
+  	set inert(isInert) {
+		if (this._inert === isInert) {
+		  	return;
+		}
+
+		this._inert = isInert;
+
+		this._focusableElements.forEach((child) => {
+			if (isInert) {
+				// If the child has an explict tabindex save it
+				if (child.hasAttribute('tabindex')) {
+					child.__savedTabindex = child.tabIndex;
+				}
+				// Set ALL focusable children to tabindex -1
+				child.setAttribute('tabindex', -1);
+			} else {
+				// If the child has a saved tabindex, restore it
+				// Because the value could be 0, explicitly check that it's not false
+				if (child.__savedTabindex === 0 || child.__savedTabindex) {
+					return child.setAttribute('tabindex', child.__savedTabindex);
+				} else {
+				// Remove tabindex from ANY REMAINING children
+					child.removeAttribute('tabindex');
+				}
+			}
+		});
+  }
+}
+
 class SideNav {
   	constructor () {
 		this.showButtonEl = document.querySelector('.js-menu-show');
 		this.hideButtonEl = document.querySelector('.js-menu-hide');
 		this.sideNavEl = document.querySelector('.js-side-nav');
 		this.sideNavContainerEl = document.querySelector('.js-side-nav-container');
+		this.sideNavLinkEl = document.querySelectorAll('.js-side-nav__link');
 		// Control whether the container's children can be focused
 		// Set initial state to inert since the drawer is offscreen
 		this.detabinator = new Detabinator(this.sideNavContainerEl);
@@ -49,6 +119,9 @@ class SideNav {
 		this.hideButtonEl.addEventListener('click', this.hideSideNav);
 		this.sideNavEl.addEventListener('click', this.hideSideNav);
 		this.sideNavContainerEl.addEventListener('click', this.blockClicks);
+		for (var i = 0; i < this.sideNavLinkEl.length; i++) {
+		    this.sideNavLinkEl[i].addEventListener('click', this.hideSideNav);
+		}
 
 		this.sideNavEl.addEventListener('touchstart', this.onTouchStart, this.applyPassive());
 		this.sideNavEl.addEventListener('touchmove', this.onTouchMove, this.applyPassive());
@@ -127,49 +200,4 @@ class SideNav {
 }
 
 new SideNav();
-
-class Detabinator {
-  	constructor(element) {
-		if (!element) {
-		  	throw new Error('Missing required argument. new Detabinator needs an element reference');
-		}
-		this._inert = false;
-		this._focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex], [contenteditable]';
-		this._focusableElements = Array.from(
-		  	element.querySelectorAll(this._focusableElementsString)
-		);
-  	}
-
-  	get inert() {
-		return this._inert;
-  	}
-
-  	set inert(isInert) {
-		if (this._inert === isInert) {
-		  	return;
-		}
-
-		this._inert = isInert;
-
-		this._focusableElements.forEach((child) => {
-			if (isInert) {
-				// If the child has an explict tabindex save it
-				if (child.hasAttribute('tabindex')) {
-					child.__savedTabindex = child.tabIndex;
-				}
-				// Set ALL focusable children to tabindex -1
-				child.setAttribute('tabindex', -1);
-			} else {
-				// If the child has a saved tabindex, restore it
-				// Because the value could be 0, explicitly check that it's not false
-				if (child.__savedTabindex === 0 || child.__savedTabindex) {
-					return child.setAttribute('tabindex', child.__savedTabindex);
-				} else {
-				// Remove tabindex from ANY REMAINING children
-					child.removeAttribute('tabindex');
-				}
-			}
-		});
-  }
-}
 
