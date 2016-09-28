@@ -19,18 +19,18 @@
 					Side Nav
 				</header>
 				<ul class="side-nav__content">
-					<li><a class="js-side-nav__link" href="/">Introduction</a></li>
-					<li><a class="js-side-nav__link" href="/colors/">Colors</a></li>
-					<li><a class="js-side-nav__link" href="/buttons/">Buttons</a></li>
+					<li><a class="js-side-nav__link" href="/styleguide/">Introduction</a></li>
+					<li><a class="js-side-nav__link" href="colors/">Colors</a></li>
+					<li><a class="js-side-nav__link" href="buttons/">Buttons</a></li>
 				</ul>
 			</nav>
 		</aside>
 
-		<sc-view remote class="view-home" route="^/$"></sc-view>
-  		<sc-view class="view-colors visible" route="^/colors/(.*)">
+		<sc-view remote class="view-home" route="^/styleguide/$"></sc-view>
+  		<sc-view class="view-colors visible" route="^/styleguide/colors/(.*)">
   			<h1>Colors</h1>
   		</sc-view>
-  		<sc-view remote class="view-buttons" route="^/buttons/(.*)"></sc-view>
+  		<sc-view remote class="view-buttons" route="^/styleguide/buttons/(.*)"></sc-view>
 
 		<sc-router></sc-router>
 
