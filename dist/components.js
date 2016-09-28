@@ -126,7 +126,7 @@ var SCView = function (_HTMLElement2) {
         });
 
         // Add the fragment to the page.
-        _this3.appendChild(newView);
+        _this3.appendChild(_this3._view);
 
         // Clear the timeout and remove the spinner if needed.
         clearTimeout(spinnerTimeout);

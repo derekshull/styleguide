@@ -36,7 +36,7 @@ class SCView extends HTMLElement {
       });
 
       // Add the fragment to the page.
-      this.appendChild(newView);
+      this.appendChild(this._view);
 
       // Clear the timeout and remove the spinner if needed.
       clearTimeout(spinnerTimeout);
