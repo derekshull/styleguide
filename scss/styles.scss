@@ -153,6 +153,9 @@ sc-view {
   transition: transform 0.3s cubic-bezier(0,0,0.3,1),
     opacity 0.3s cubic-bezier(0,0,0.3,1);
   z-index:0;
+  display:block;
+  zoom: 1;
+  overflow:hidden;
 }
 
 sc-view.visible {
@@ -160,6 +163,7 @@ sc-view.visible {
   pointer-events: auto;
   transform: none;
   height:100%;
+  line-height: initial;
 }
 
 sc-view[remote]::before {
