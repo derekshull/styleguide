@@ -1,0 +1,19 @@
+@@include('../../include/_head.html', {
+    "url": "http://localhost:3000"
+})
+
+		<sc-view remote class="view-home" route="^/$"></sc-view>
+  		<sc-view remote class="view-colors" route="^/colors/(.*)"></sc-view>
+  		<sc-view class="view-buttons visible" route="^/buttons/(.*)">
+  			<h1>Buttons</h1>
+			<p>
+				<aris-button secondary>Secondary Button</aris-button>
+				<aris-button secondary disabled>Disabled Secondary Button</aris-button>
+			</p>
+  		</sc-view>
+
+		<sc-router></sc-router>
+
+@@include('../../include/_footer.html', {
+    "url": "http://localhost:3000"
+})

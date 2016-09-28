@@ -1,5 +1,5 @@
-@import '../general';
-@import '../normalize-partials/button';
+@import '../../scss/general';
+@import '../../scss/normalize-partials/button';
 
 :host {
 	@include z2();

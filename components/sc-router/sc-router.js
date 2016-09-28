@@ -28,15 +28,16 @@ class SCView extends HTMLElement {
     xhr.onload = evt => {
       const newDoc = evt.target.response;
       const newView = newDoc.querySelector('sc-view.visible');
-      console.log(newView);
+      //console.log(newView.innerHTML);
 
       // Copy in the child nodes from the parent.
-      newView.childNodes.forEach(node => {
+      /*newView.childNodes.forEach(node => {
         this._view.appendChild(node);
-      });
+      });*/
 
       // Add the fragment to the page.
-      this.appendChild(this._view);
+      //this.appendChild(newView.innerHTML);
+      this.innerHTML = newView.innerHTML;
 
       // Clear the timeout and remove the spinner if needed.
       clearTimeout(spinnerTimeout);
