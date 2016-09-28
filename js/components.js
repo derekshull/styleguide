@@ -203,13 +203,10 @@ var SCRouter = function (_HTMLElement3) {
       var _this7 = this;
 
       var path = window.location.pathname;
-      console.log("path: "+path);
       var routes = Array.from(this._routes.keys());
-      console.log("routes: "+routes);
       var route = routes.find(function (r) {
         return r.test(path);
       });
-      console.log("route: "+route);
       var data = route.exec(path);
 
       if (!route) {
