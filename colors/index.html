@@ -4,8 +4,7 @@
 	   <meta charset="UTF-8">
 	   <meta name="viewport" content="width=device-width, initial-scale=1">
 	   <title>BeaconSage Styleguide</title>
-	   <base href="http://localhost:3000/">
-	   <link rel="stylesheet" type="text/css" href="./dist/styles.css">
+	   <link rel="stylesheet" type="text/css" href="http://localhost:3000/dist/styles.css">
 	</head>
 	<body>
 		<header>
@@ -27,14 +26,19 @@
 		</aside>
 
 		<sc-view remote class="view-home" route="^/$"></sc-view>
-  		<sc-view class="view-colors visible" route="^/colors/(.*)">Colors</sc-view>
+  		<sc-view class="view-colors visible" route="^/colors/(.*)">
+  			<h1>Introduction</h1>
+			<p>
+				This styleguide is a design language created to provide visual principles for BeaconSage.  It's an ever-changing document that lives at the intersection of science and creativity.  The styleguide draws from our team's experiences and other resources, such as Material Design, to provide what we believe will create great experiences for visitors.
+			</p>
+  		</sc-view>
   		<sc-view remote class="view-buttons" route="^/buttons/(.*)"></sc-view>
 
 		<sc-router></sc-router>
 
-		<script defer="defer" src="/dist/webcomponents.min.js"></script>
-		<script defer="defer" src="/dist/components.js"></script>
-		<script defer="defer" src="/dist/fastclick.js"></script>
-		<script defer="defer" src="/dist/app.js" type="text/javascript"></script> 
+		<script defer="defer" src="http://localhost:3000/dist/webcomponents.min.js"></script>
+		<script defer="defer" src="http://localhost:3000/dist/components.js"></script>
+		<script defer="defer" src="http://localhost:3000/dist/fastclick.js"></script>
+		<script defer="defer" src="http://localhost:3000/dist/app.js" type="text/javascript"></script> 
 	</body> 
 </html>

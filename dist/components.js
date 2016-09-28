@@ -118,6 +118,7 @@ var SCView = function (_HTMLElement2) {
       xhr.onload = function (evt) {
         var newDoc = evt.target.response;
         var newView = newDoc.querySelector('sc-view.visible');
+        console.log(newView);
 
         // Copy in the child nodes from the parent.
         newView.childNodes.forEach(function (node) {
@@ -125,7 +126,7 @@ var SCView = function (_HTMLElement2) {
         });
 
         // Add the fragment to the page.
-        _this3.appendChild(_this3._view);
+        _this3.appendChild(newView);
 
         // Clear the timeout and remove the spinner if needed.
         clearTimeout(spinnerTimeout);
