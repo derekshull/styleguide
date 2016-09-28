@@ -352,14 +352,18 @@ sc-view {
   transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0, 0, 0.3, 1);
   transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1), opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
   transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1), opacity 0.3s cubic-bezier(0, 0, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-  z-index: 0; }
+  z-index: 0;
+  display: block;
+  zoom: 1;
+  overflow: hidden; }
 
 sc-view.visible {
   opacity: 1;
   pointer-events: auto;
   -webkit-transform: none;
           transform: none;
-  height: 100%; }
+  height: 100%;
+  line-height: initial; }
 
 sc-view[remote]::before {
   opacity: 0;

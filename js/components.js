@@ -44,22 +44,22 @@ var SCView = function (_HTMLElement) {
         return _this2._showSpinner();
       }, 500);
 
-      this._view = new DocumentFragment();
+      //this._view = new DocumentFragment();
+      this._view = document.createElement('div');
+
       var xhr = new XMLHttpRequest();
 
       xhr.onload = function (evt) {
         var newDoc = evt.target.response;
         var newView = newDoc.querySelector('sc-view.visible');
-        //console.log(newView.innerHTML);
 
         // Copy in the child nodes from the parent.
-        /*newView.childNodes.forEach(node => {
-          this._view.appendChild(node);
-        });*/
+        while (newView.firstChild) {
+          _this2._view.appendChild(newView.firstChild);
+        }
 
         // Add the fragment to the page.
-        //this.appendChild(newView.innerHTML);
-        _this2.innerHTML = newView.innerHTML;
+        _this2.appendChild(_this2._view);
 
         // Clear the timeout and remove the spinner if needed.
         clearTimeout(spinnerTimeout);
