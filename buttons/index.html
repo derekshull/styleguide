@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	   <meta charset="UTF-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1">
+	   <title>BeaconSage Styleguide</title>
+	   <link rel="stylesheet" type="text/css" href="http://localhost:3000/css/styles.css">
+	</head>
+	<body>
+		<header>
+			<button class="js-menu-show header__menu-toggle material-icons">menu</button>
+		</header>
+
+		<aside class="js-side-nav side-nav">
+			<nav class="js-side-nav-container side-nav__container">
+				<button class="js-menu-hide side-nav__hide material-icons">close</button>
+				<header class="side-nav__header">
+					Side Nav
+				</header>
+				<ul class="side-nav__content">
+					<li><a class="js-side-nav__link" href="/">Introduction</a></li>
+					<li><a class="js-side-nav__link" href="/colors/">Colors</a></li>
+					<li><a class="js-side-nav__link" href="/buttons/">Buttons</a></li>
+				</ul>
+			</nav>
+		</aside>
+
+		<sc-view remote class="view-home" route="^/$"></sc-view>
+  		<sc-view remote class="view-colors" route="^/colors/(.*)"></sc-view>
+  		<sc-view class="view-buttons visible" route="^/buttons/(.*)">
+  			<h1>Buttons</h1>
+			<p>
+				<aris-button secondary>Secondary Button</aris-button>
+				<aris-button secondary disabled>Disabled Secondary Button</aris-button>
+			</p>
+  		</sc-view>
+
+		<sc-router></sc-router>
+
+		<script defer="defer" src="http://localhost:3000/js/webcomponents.min.js"></script>
+		<script defer="defer" src="http://localhost:3000/js/components.js"></script>
+		<script defer="defer" src="http://localhost:3000/js/fastclick.js"></script>
+		<script defer="defer" src="http://localhost:3000/js/app.js" type="text/javascript"></script> 
+	</body> 
+</html>
