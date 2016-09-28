@@ -8,76 +8,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var arisButton = function (_HTMLElement) {
-  _inherits(arisButton, _HTMLElement);
-
-  _createClass(arisButton, [{
-    key: 'disabled',
-
-
-    // A getter/setter for a disabled property.
-    get: function get() {
-      return this.hasAttribute('disabled');
-    },
-    set: function set(val) {
-      // Reflect the value of the disabled property as an HTML attribute.
-      if (val) {
-        this.setAttribute('disabled', '');
-      } else {
-        this.removeAttribute('disabled');
-      }
-    }
-  }], [{
-    key: 'observedAttributes',
-    get: function get() {
-      return ['disabled'];
-    }
-  }]);
-
-  function arisButton() {
-    _classCallCheck(this, arisButton);
-
-    var _this = _possibleConstructorReturn(this, (arisButton.__proto__ || Object.getPrototypeOf(arisButton)).call(this));
-
-    _this.addEventListener('click', function (e) {
-      if (_this.disabled) {
-        return;
-      }
-    });
-    return _this;
-  }
-
-  _createClass(arisButton, [{
-    key: 'createdCallback',
-    value: function createdCallback() {
-      this.createShadowRoot().innerHTML = '\n\t\t\t<style>\nbutton {\n  color: inherit;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n  margin: 0;\n  /* 3 */\n  overflow: visible;\n  text-transform: none;\n  -webkit-appearance: button;\n  /* 2 */\n  cursor: pointer;\n  /* 3 */ }\n\nbutton[disabled] {\n  cursor: default;\n  outline: none; }\n\nbutton::-moz-focus-inner {\n  border: 0;\n  padding: 0; }\n\n:host {\n  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  border-radius: 10px;\n  background: #fff;\n  contain: content;\n  cursor: pointer;\n  display: inline-block;\n  padding: 6px 14px;\n  -webkit-transition: box-shadow 0.1s;\n  transition: box-shadow 0.1s;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none; }\n\n/*Basic button properties*/\nbutton {\n  border: 0px;\n  border-radius: 10px;\n  color: white;\n  cursor: pointer;\n  font-size: 14px; }\n  button:focus {\n    outline-color: #fff;\n    outline-style: dashed;\n    outline-width: 1px; }\n\n/*PRIMARY BUTTON STYLES*/\n:host([primary]) {\n  background: #b7121f;\n  border: 4px solid #F49199;\n  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n\n:host([primary]) button {\n  background: #b7121f; }\n\n@media screen and (min-width: 768px) {\n  /* Only do hover on desktop since mobile devices don\'t support hover.*/\n  :host([primary]:hover) {\n    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); } }\n\n:host([primary]:active) {\n  box-shadow: none; }\n\n:host([primary][disabled]) {\n  background: #EF5E6A;\n  border: 4px solid #EF5E6A;\n  box-shadow: none;\n  pointer-events: none;\n  cursor: not-allowed; }\n\n:host([primary][disabled]) button {\n  background: #EF5E6A;\n  outline: none;\n  cursor: not-allowed;\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none; }\n\n/*SECONDARY BUTTON STYLES */\n:host([secondary]) {\n  background: #2196F3;\n  border: 4px solid #2196F3;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }\n\n:host([secondary]) button {\n  background: #2196F3; }\n\n@media screen and (min-width: 768px) {\n  /* Only do hover on desktop since mobile devices don\'t support hover.*/\n  :host([secondary]:hover) {\n    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); } }\n\n:host([secondary]:active) {\n  box-shadow: none; }\n\n:host([secondary][disabled]) {\n  background: #90CAF9;\n  border: 4px solid #90CAF9;\n  box-shadow: none;\n  pointer-events: none;\n  cursor: not-allowed; }\n\n:host([secondary][disabled]) button {\n  background: #90CAF9;\n  outline: none;\n  cursor: not-allowed;\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none; }\n\n/*BIG SECONDARY BUTTON STYLES */\n:host([secondary][big]) {\n  background: #2196F3;\n  border: 4px solid #2196F3;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);\n  padding: 14px 14px; }\n\n:host([secondary][big]) button {\n  background: #2196F3;\n  font-size: 18px; }\n\n@media screen and (min-width: 768px) {\n  /* Only do hover on desktop since mobile devices don\'t support hover.*/\n  :host([secondary][big]:hover) {\n    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); } }\n\n:host([secondary][big]:active) {\n  box-shadow: none; }\n\n:host([secondary][big][disabled]) {\n  background: #90CAF9;\n  border: 4px solid #90CAF9;\n  box-shadow: none;\n  pointer-events: none;\n  cursor: not-allowed; }\n\n:host([secondary][big][disabled]) button {\n  background: #90CAF9;\n  outline: none;\n  cursor: not-allowed;\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none; }\n\n</style>\n\t\t\t<button>\n\t\t\t\t<content></content>\n\t\t\t</button>\n\t\t';
-    }
-  }, {
-    key: 'attachedCallback',
-    value: function attachedCallback() {
-      if (window.WebComponents && WebComponents.ShadowCSS) {
-        WebComponents.ShadowCSS.shimStyling(this.shadowRoot, 'aris-button');
-      }
-
-      var btn = this.shadowRoot.querySelector('button');
-
-      if (this.disabled) {
-        btn.setAttribute('tabindex', '-1');
-        btn.setAttribute('aria-disabled', 'true');
-      } else {
-        btn.setAttribute('tabindex', '0');
-        btn.setAttribute('aria-disabled', 'false');
-      }
-    }
-  }]);
-
-  return arisButton;
-}(HTMLElement);
-
-var myArisButton = document.registerElement("aris-button", arisButton);
-
-var SCView = function (_HTMLElement2) {
-  _inherits(SCView, _HTMLElement2);
+var SCView = function (_HTMLElement) {
+  _inherits(SCView, _HTMLElement);
 
   function SCView() {
     _classCallCheck(this, SCView);
@@ -105,11 +37,11 @@ var SCView = function (_HTMLElement2) {
   }, {
     key: '_loadView',
     value: function _loadView(data) {
-      var _this3 = this;
+      var _this2 = this;
 
       // Wait for half a second then show the spinner.
       var spinnerTimeout = setTimeout(function (_) {
-        return _this3._showSpinner();
+        return _this2._showSpinner();
       }, 500);
 
       this._view = new DocumentFragment();
@@ -127,11 +59,11 @@ var SCView = function (_HTMLElement2) {
 
         // Add the fragment to the page.
         //this.appendChild(newView.innerHTML);
-        _this3.innerHTML = newView.innerHTML;
+        _this2.innerHTML = newView.innerHTML;
 
         // Clear the timeout and remove the spinner if needed.
         clearTimeout(spinnerTimeout);
-        _this3._hideSpinner();
+        _this2._hideSpinner();
       };
       xhr.responseType = 'document';
       xhr.open('GET', '' + data[0]);
@@ -140,7 +72,7 @@ var SCView = function (_HTMLElement2) {
   }, {
     key: 'in',
     value: function _in(data) {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this._isRemote && !this._view) {
         this._loadView(data);
@@ -148,27 +80,27 @@ var SCView = function (_HTMLElement2) {
 
       return new Promise(function (resolve, reject) {
         var onTransitionEnd = function onTransitionEnd() {
-          _this4.removeEventListener('transitionend', onTransitionEnd);
+          _this3.removeEventListener('transitionend', onTransitionEnd);
           resolve();
         };
 
-        _this4.classList.add('visible');
-        _this4.addEventListener('transitionend', onTransitionEnd);
+        _this3.classList.add('visible');
+        _this3.addEventListener('transitionend', onTransitionEnd);
       });
     }
   }, {
     key: 'out',
     value: function out() {
-      var _this5 = this;
+      var _this4 = this;
 
       return new Promise(function (resolve, reject) {
         var onTransitionEnd = function onTransitionEnd() {
-          _this5.removeEventListener('transitionend', onTransitionEnd);
+          _this4.removeEventListener('transitionend', onTransitionEnd);
           resolve();
         };
 
-        _this5.classList.remove('visible');
-        _this5.addEventListener('transitionend', onTransitionEnd);
+        _this4.classList.remove('visible');
+        _this4.addEventListener('transitionend', onTransitionEnd);
       });
     }
   }, {
@@ -188,8 +120,8 @@ var SCView = function (_HTMLElement2) {
 
 document.registerElement('sc-view', SCView);
 
-var SCRouter = function (_HTMLElement3) {
-  _inherits(SCRouter, _HTMLElement3);
+var SCRouter = function (_HTMLElement2) {
+  _inherits(SCRouter, _HTMLElement2);
 
   function SCRouter() {
     _classCallCheck(this, SCRouter);
@@ -200,7 +132,7 @@ var SCRouter = function (_HTMLElement3) {
   _createClass(SCRouter, [{
     key: '_onChanged',
     value: function _onChanged() {
-      var _this7 = this;
+      var _this6 = this;
 
       var path = window.location.pathname;
       var routes = Array.from(this._routes.keys());
@@ -246,9 +178,9 @@ var SCRouter = function (_HTMLElement3) {
       // there isn't one), update the references to the current view, allow
       // outgoing animations to proceed.
       return outViewPromise.then(function (_) {
-        _this7._currentView = _this7._newView;
-        _this7._isTransitioningBetweenViews = false;
-        return _this7._newView.in(data);
+        _this6._currentView = _this6._newView;
+        _this6._isTransitioningBetweenViews = false;
+        return _this6._newView.in(data);
       });
     }
   }, {
@@ -267,13 +199,13 @@ var SCRouter = function (_HTMLElement3) {
   }, {
     key: '_addRoutes',
     value: function _addRoutes() {
-      var _this8 = this;
+      var _this7 = this;
 
       var views = Array.from(document.querySelectorAll('sc-view'));
       views.forEach(function (view) {
         if (!view.route) return;
 
-        _this8.addRoute(new RegExp(view.route, 'i'), view);
+        _this7.addRoute(new RegExp(view.route, 'i'), view);
       }, this);
     }
   }, {
@@ -311,3 +243,71 @@ var SCRouter = function (_HTMLElement3) {
 }(HTMLElement);
 
 document.registerElement('sc-router', SCRouter);
+
+var arisButton = function (_HTMLElement3) {
+  _inherits(arisButton, _HTMLElement3);
+
+  _createClass(arisButton, [{
+    key: 'disabled',
+
+
+    // A getter/setter for a disabled property.
+    get: function get() {
+      return this.hasAttribute('disabled');
+    },
+    set: function set(val) {
+      // Reflect the value of the disabled property as an HTML attribute.
+      if (val) {
+        this.setAttribute('disabled', '');
+      } else {
+        this.removeAttribute('disabled');
+      }
+    }
+  }], [{
+    key: 'observedAttributes',
+    get: function get() {
+      return ['disabled'];
+    }
+  }]);
+
+  function arisButton() {
+    _classCallCheck(this, arisButton);
+
+    var _this8 = _possibleConstructorReturn(this, (arisButton.__proto__ || Object.getPrototypeOf(arisButton)).call(this));
+
+    _this8.addEventListener('click', function (e) {
+      if (_this8.disabled) {
+        return;
+      }
+    });
+    return _this8;
+  }
+
+  _createClass(arisButton, [{
+    key: 'createdCallback',
+    value: function createdCallback() {
+      this.createShadowRoot().innerHTML = '\n\t\t\t<style>\nbutton {\n  color: inherit;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n  margin: 0;\n  /* 3 */\n  overflow: visible;\n  text-transform: none;\n  -webkit-appearance: button;\n  /* 2 */\n  cursor: pointer;\n  /* 3 */ }\n\nbutton[disabled] {\n  cursor: default;\n  outline: none; }\n\nbutton::-moz-focus-inner {\n  border: 0;\n  padding: 0; }\n\n:host {\n  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  border-radius: 10px;\n  background: #fff;\n  contain: content;\n  cursor: pointer;\n  display: inline-block;\n  padding: 6px 14px;\n  -webkit-transition: box-shadow 0.1s;\n  transition: box-shadow 0.1s;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none; }\n\n/*Basic button properties*/\nbutton {\n  border: 0px;\n  border-radius: 10px;\n  color: white;\n  cursor: pointer;\n  font-size: 14px; }\n  button:focus {\n    outline-color: #fff;\n    outline-style: dashed;\n    outline-width: 1px; }\n\n/*PRIMARY BUTTON STYLES*/\n:host([primary]) {\n  background: #b7121f;\n  border: 4px solid #F49199;\n  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }\n\n:host([primary]) button {\n  background: #b7121f; }\n\n@media screen and (min-width: 768px) {\n  /* Only do hover on desktop since mobile devices don\'t support hover.*/\n  :host([primary]:hover) {\n    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21); } }\n\n:host([primary]:active) {\n  box-shadow: none; }\n\n:host([primary][disabled]) {\n  background: #EF5E6A;\n  border: 4px solid #EF5E6A;\n  box-shadow: none;\n  pointer-events: none;\n  cursor: not-allowed; }\n\n:host([primary][disabled]) button {\n  background: #EF5E6A;\n  outline: none;\n  cursor: not-allowed;\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none; }\n\n/*SECONDARY BUTTON STYLES */\n:host([secondary]) {\n  background: #2196F3;\n  border: 4px solid #2196F3;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }\n\n:host([secondary]) button {\n  background: #2196F3; }\n\n@media screen and (min-width: 768px) {\n  /* Only do hover on desktop since mobile devices don\'t support hover.*/\n  :host([secondary]:hover) {\n    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); } }\n\n:host([secondary]:active) {\n  box-shadow: none; }\n\n:host([secondary][disabled]) {\n  background: #90CAF9;\n  border: 4px solid #90CAF9;\n  box-shadow: none;\n  pointer-events: none;\n  cursor: not-allowed; }\n\n:host([secondary][disabled]) button {\n  background: #90CAF9;\n  outline: none;\n  cursor: not-allowed;\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none; }\n\n/*BIG SECONDARY BUTTON STYLES */\n:host([secondary][big]) {\n  background: #2196F3;\n  border: 4px solid #2196F3;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);\n  padding: 14px 14px; }\n\n:host([secondary][big]) button {\n  background: #2196F3;\n  font-size: 18px; }\n\n@media screen and (min-width: 768px) {\n  /* Only do hover on desktop since mobile devices don\'t support hover.*/\n  :host([secondary][big]:hover) {\n    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); } }\n\n:host([secondary][big]:active) {\n  box-shadow: none; }\n\n:host([secondary][big][disabled]) {\n  background: #90CAF9;\n  border: 4px solid #90CAF9;\n  box-shadow: none;\n  pointer-events: none;\n  cursor: not-allowed; }\n\n:host([secondary][big][disabled]) button {\n  background: #90CAF9;\n  outline: none;\n  cursor: not-allowed;\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none; }\n\n</style>\n\t\t\t<button>\n\t\t\t\t<content></content>\n\t\t\t</button>\n\t\t';
+    }
+  }, {
+    key: 'attachedCallback',
+    value: function attachedCallback() {
+      if (window.WebComponents && WebComponents.ShadowCSS) {
+        WebComponents.ShadowCSS.shimStyling(this.shadowRoot, 'aris-button');
+      }
+
+      var btn = this.shadowRoot.querySelector('button');
+
+      if (this.disabled) {
+        btn.setAttribute('tabindex', '-1');
+        btn.setAttribute('aria-disabled', 'true');
+      } else {
+        btn.setAttribute('tabindex', '0');
+        btn.setAttribute('aria-disabled', 'false');
+      }
+    }
+  }]);
+
+  return arisButton;
+}(HTMLElement);
+
+var myArisButton = document.registerElement("aris-button", arisButton);
