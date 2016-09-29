@@ -84,6 +84,8 @@ gulp.task('check-css', function() {
 
 gulp.task('watch', ['browserSync', 'build'], function (){
     gulp.watch('scss/**/*.scss', ['build']);
+    gulp.watch('include/**/*.html', ['build']);
+    gulp.watch('views/**/*.html', ['build']);
     gulp.watch('components/**/*.scss', ['build']);
     gulp.watch('components/**/*.js', ['build']);
 });

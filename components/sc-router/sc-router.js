@@ -1,24 +1,24 @@
 class SCView extends HTMLElement {
 
-  	createdCallback () {
+	createdCallback () {
 		this._spinnerTimeout = undefined;
 		this._view = null;
 		this._isRemote = (this.getAttribute('remote') !== null);
-  	}
+	}
 
-  	get route () {
+	get route () {
 		return this.getAttribute('route') || null;
-  	}
+	}
 
-  	_hideSpinner () {
+	_hideSpinner () {
 		this.classList.remove('pending');
-  	}
+	}
 
-  	_showSpinner () {
+	_showSpinner () {
 		this.classList.add('pending');
-  	}
+	}
 
-  	_loadView (data) {
+	_loadView (data) {
 		// Wait for half a second then show the spinner.
 		const spinnerTimeout = setTimeout(_ => this._showSpinner(), 500);
 
@@ -28,57 +28,59 @@ class SCView extends HTMLElement {
 		const xhr = new XMLHttpRequest();
 
 		xhr.onload = evt => {
-	  		const newDoc = evt.target.response;
-	  		const newView = newDoc.querySelector('sc-view.visible');
+			const newDoc = evt.target.response;
+			const currentView = document.querySelector('sc-view.visible');
+			const newView = newDoc.querySelector('sc-view.visible');
 
-	  		// Copy in the child nodes from the parent.
-	  		while(newView.firstChild) {
-		 		this._view.appendChild(newView.firstChild);
-	  		}
+			// Copy in the child nodes from the parent.
+			while(newView.firstChild) {
+				this._view.appendChild(newView.firstChild);
+			};
 
-	  		// Add the fragment to the page.
-	  		this.appendChild(this._view);
+			// Add the fragment to the page.
+			currentView.innerHTML = this._view.innerHTML;
+			
 
-	  		// Clear the timeout and remove the spinner if needed.
-	  		clearTimeout(spinnerTimeout);
-	  		this._hideSpinner();
+			// Clear the timeout and remove the spinner if needed.
+			clearTimeout(spinnerTimeout);
+			this._hideSpinner();
 		};
-		xhr.responseType = 'document';
 		xhr.open('GET', `${data[0]}`);
+		xhr.responseType = 'document';
 		xhr.send();
-  	}
+	}
 
-  	in (data) {
+	in (data) {
 		if (this._isRemote && !this._view) {
-	  		this._loadView(data);
+			this._loadView(data);
 		}
 
 		return new Promise((resolve, reject) => {
-		  	const onTransitionEnd = () => {
+			const onTransitionEnd = () => {
 				this.removeEventListener('transitionend', onTransitionEnd);
 				resolve();
-		  	};
+			};
 
-	  		this.classList.add('visible');
-	  		this.addEventListener('transitionend', onTransitionEnd);
+			this.classList.add('visible');
+			this.addEventListener('transitionend', onTransitionEnd);
 		});
-  	}
+	}
 
-  	out () {
+	out () {
 		return new Promise((resolve, reject) => {
-		  	const onTransitionEnd = () => {
+			const onTransitionEnd = () => {
 				this.removeEventListener('transitionend', onTransitionEnd);
 				resolve();
-		  	};
+			};
 
-	  		this.classList.remove('visible');
-	  		this.addEventListener('transitionend', onTransitionEnd);
+			this.classList.remove('visible');
+			this.addEventListener('transitionend', onTransitionEnd);
 		});
-  	}
+	}
 
-  	update () {
+	update () {
 		return Promise.resolve();
-  	}
+	}
 }
 
 document.registerElement('sc-view', SCView);
