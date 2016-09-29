@@ -112,8 +112,8 @@ var SCView = function (_HTMLElement2) {
         return _this3._showSpinner();
       }, 500);
 
-      this._view = new DocumentFragment();
-      //this._view = document.createElement('div');
+      //this._view = new DocumentFragment();
+      this._view = document.createElement('div');
 
       var xhr = new XMLHttpRequest();
 
