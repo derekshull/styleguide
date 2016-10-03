@@ -28,6 +28,7 @@ class arisButton extends HTMLElement {
       		}
     	});
 	} 
+
 	createdCallback() {
 		this.createShadowRoot().innerHTML = `
 			<!-- inject-style src="./processing/aris-button/aris-button.css" -->
@@ -38,6 +39,7 @@ class arisButton extends HTMLElement {
 	}
 
 	attachedCallback() {
+
 		if (window.WebComponents && WebComponents.ShadowCSS) {
 	        WebComponents.ShadowCSS.shimStyling(this.shadowRoot, 'aris-button');
 	    }
