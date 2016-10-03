@@ -1,3 +1,4 @@
 node_modules
 processing
 dist
+.DS_Store
