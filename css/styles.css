@@ -194,12 +194,16 @@ th {
   box-sizing: border-box; }
 
 html, body {
+<<<<<<< HEAD
   height: 100%;
   background: #ededed; }
 
 @media (max-width: 400px) {
   iframe[src*="codepen.io"] {
     width: 280px !important; } }
+=======
+  height: 100%; }
+>>>>>>> c35656add4aa5a6a952e6ea6a9693954adba35f8
 
 header {
   width: 100%;
@@ -219,6 +223,12 @@ header {
           align-items: center;
   padding: 0 16px; }
 
+<<<<<<< HEAD
+=======
+section {
+  padding: 20px; }
+
+>>>>>>> c35656add4aa5a6a952e6ea6a9693954adba35f8
 .header__menu-toggle {
   background: none;
   border: none;
@@ -306,7 +316,11 @@ header {
 
 .side-nav__header {
   height: 200px;
+<<<<<<< HEAD
   background: #b7121f;
+=======
+  background: #EA2663;
+>>>>>>> c35656add4aa5a6a952e6ea6a9693954adba35f8
   color: #FFF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -342,7 +356,11 @@ header {
   background: #CCC; }
 
 sc-view {
+<<<<<<< HEAD
   contain: layout;
+=======
+  contain: strict;
+>>>>>>> c35656add4aa5a6a952e6ea6a9693954adba35f8
   position: relative;
   width: 100%;
   height: 0;
@@ -364,9 +382,14 @@ sc-view.visible {
   pointer-events: auto;
   -webkit-transform: none;
           transform: none;
+<<<<<<< HEAD
   min-height: 100%;
   line-height: initial;
   overflow: inherit; }
+=======
+  height: 100%;
+  line-height: initial; }
+>>>>>>> c35656add4aa5a6a952e6ea6a9693954adba35f8
 
 sc-view[remote]::before {
   opacity: 0;
