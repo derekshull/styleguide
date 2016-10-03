@@ -1,6 +1,31 @@
-@@include('../../include/_head.html', {
-    "url": ""
-})
+<!doctype html>
+<html lang="en">
+	<head>
+	   <meta charset="UTF-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1">
+	   <base href="https://derekshull.github.io/styleguide">
+	   <title>BeaconSage Styleguide</title>
+	   <link rel="stylesheet" type="text/css" href="css/styles.css">
+	</head>
+	<body>
+		<header>
+			<button class="js-menu-show header__menu-toggle material-icons">menu</button>
+		</header>
+
+		<aside class="js-side-nav side-nav">
+			<nav class="js-side-nav-container side-nav__container">
+				<button class="js-menu-hide side-nav__hide material-icons">close</button>
+				<header class="side-nav__header">
+					Side Nav
+				</header>
+				<ul class="side-nav__content">
+					<li><a class="js-side-nav__link" href="/styleguide/">Introduction</a></li>
+					<li><a class="js-side-nav__link" href="colors/">Colors</a></li>
+					<li><a class="js-side-nav__link" href="buttons/">Buttons</a></li>
+					<li><a class="js-side-nav__link" href="inputs/">Inputs</a></li>
+				</ul>
+			</nav>
+		</aside>
 
 		<sc-view remote class="view-home" route="^/$"></sc-view>
   		<sc-view remote class="view-colors" route="^/colors/(.*)"></sc-view>
@@ -55,9 +80,13 @@
 				<iframe height='127' scrolling='no' src='//codepen.io/derekshull/embed/pEWQYQ/?height=127&theme-id=7527&default-tab=html&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>
 			</section>
   		</sc-view>
+  		<sc-view remote class="view-inputs" route="^/inputs/(.*)"></sc-view>
 
 		<sc-router></sc-router>
 
-@@include('../../include/_footer.html', {
-    "url": ""
-})
+		<script defer="defer" src="js/webcomponents.min.js"></script>
+		<script defer="defer" src="js/components.js"></script>
+		<script defer="defer" src="js/fastclick.js"></script>
+		<script defer="defer" src="js/app.js" type="text/javascript"></script> 
+	</body> 
+</html>
