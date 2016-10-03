@@ -1,11 +1,13 @@
 'use strict';
 
+//FASTCLICK LISTENER
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body);
     }, false);
 }
 
+//Side-nav JS
 class App {
   constructor () {
     const router = document.querySelector('sc-router');

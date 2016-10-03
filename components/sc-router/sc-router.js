@@ -84,6 +84,7 @@ class SCView extends HTMLElement {
 }
 
 document.registerElement('sc-view', SCView);
+//customElements.define("sc-view", SCView);
 
 
 class SCRouter extends HTMLElement {
@@ -186,3 +187,4 @@ class SCRouter extends HTMLElement {
 }
 
 document.registerElement('sc-router', SCRouter);
+//customElements.define("sc-router", SCRouter);

@@ -9,6 +9,12 @@ html, body {
   height:100%;
 }
 
+@media (max-width: 400px) {
+  iframe[src*="codepen.io"] {
+    width: 280px !important;
+  }
+}
+
 header {
 	width: 100%;
 	height: 56px;
@@ -19,10 +25,6 @@ header {
 	flex-direction: row;
 	align-items: center;
 	padding: 0 16px;
-}
-
-section {
-	padding: 20px;
 }
 
 .header__menu-toggle {

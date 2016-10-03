@@ -56,3 +56,4 @@ class arisButton extends HTMLElement {
 }
 
 var myArisButton = document.registerElement("aris-button", arisButton);
+//customElements.define("aris-button", arisButton);

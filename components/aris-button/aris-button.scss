@@ -2,7 +2,7 @@
 @import '../../scss/normalize-partials/button';
 
 :host {
-	@include z2();
+	@include z1();
 	border-radius: 10px;
 	background:$white;
 	contain: content;
@@ -11,21 +11,51 @@
 	padding: 6px 14px;
 	transition: box-shadow 0.1s;
 	appearance: none;
+	border: 4px solid $black;
+
 }
 
 /*Basic button properties*/
 button {
+	background: $white;
 	border: 0px;
 	border-radius: 10px;
-	color: white;
 	cursor: pointer;
 	font-size: 14px;
+}
 
-	&:focus {
-	  outline-color: $white;
-	  outline-style: dashed;
-	  outline-width: 1px;
+/*STANDARD BUTTON STYLES*/
+@media screen and (min-width: $break-medium) {
+	/* Only do hover on desktop since mobile devices don't support hover.*/
+	:host(:hover) {
+		@include z2();
 	}
+}
+
+:host(:active) {
+	@include z0();
+}
+
+:host button:focus {
+  	outline-color: $black;
+  	outline-style: dashed;
+  	outline-width: 1px;
+}
+
+:host([disabled]) {
+	background: $white;
+	border: 4px solid $black;
+	@include z0();
+	pointer-events: none;
+	cursor:not-allowed;
+}
+
+:host([disabled]) button {
+	background: $white;
+	outline:none;
+	cursor:not-allowed;
+	color: $black;
+	pointer-events: none;
 }
 
 /*PRIMARY BUTTON STYLES*/
@@ -38,6 +68,13 @@ button {
 
 :host([primary]) button {
 	background: $primary;
+	color: $white;
+}
+
+:host([primary]) button:focus {
+  	outline-color: $white;
+  	outline-style: dashed;
+  	outline-width: 1px;
 }
 
 @media screen and (min-width: $break-medium) {
@@ -77,6 +114,13 @@ button {
 
 :host([secondary]) button {
 	background: $secondary;
+	color: $white;
+}
+
+:host([secondary]) button:focus {
+  	outline-color: $white;
+  	outline-style: dashed;
+  	outline-width: 1px;
 }
 
 @media screen and (min-width: $break-medium) {
@@ -116,7 +160,14 @@ button {
 
 :host([secondary][big]) button {
 	background: $secondary;
+	color: $white;
 	font-size: 18px;
+}
+
+:host([secondary][big]) button:focus {
+  	outline-color: $white;
+  	outline-style: dashed;
+  	outline-width: 1px;
 }
 
 @media screen and (min-width: $break-medium) {
