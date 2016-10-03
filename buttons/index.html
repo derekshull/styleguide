@@ -3,7 +3,7 @@
 	<head>
 	   <meta charset="UTF-8">
 	   <meta name="viewport" content="width=device-width, initial-scale=1">
-	   <base href="https://derekshull.github.io/styleguide">
+	   <base href="https://derekshull.github.io/styleguide/">
 	   <title>BeaconSage Styleguide</title>
 	   <link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head>
@@ -19,7 +19,7 @@
 					Side Nav
 				</header>
 				<ul class="side-nav__content">
-					<li><a class="js-side-nav__link" href="https://derekshull.github.io/styleguide/">Introduction</a></li>
+					<li><a class="js-side-nav__link" href="/">Introduction</a></li>
 					<li><a class="js-side-nav__link" href="colors/">Colors</a></li>
 					<li><a class="js-side-nav__link" href="buttons/">Buttons</a></li>
 					<li><a class="js-side-nav__link" href="inputs/">Inputs</a></li>
@@ -27,9 +27,9 @@
 			</nav>
 		</aside>
 
-		<sc-view remote class="view-home" route="^/$"></sc-view>
-  		<sc-view remote class="view-colors" route="^/colors/(.*)"></sc-view>
-  		<sc-view class="view-buttons visible" route="^/buttons/(.*)">
+		<sc-view remote class="view-home" route="^/styleguide/$"></sc-view>
+  		<sc-view remote class="view-colors" route="^/styleguide/colors/(.*)"></sc-view>
+  		<sc-view class="view-buttons visible" route="^/styleguide/buttons/(.*)">
   			<h1>Buttons</h1>
   			<section>
   				<h2>Standard</h2>
@@ -80,7 +80,7 @@
 				<iframe height='127' scrolling='no' src='//codepen.io/derekshull/embed/pEWQYQ/?height=127&theme-id=7527&default-tab=html&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>
 			</section>
   		</sc-view>
-  		<sc-view remote class="view-inputs" route="^/inputs/(.*)"></sc-view>
+  		<sc-view remote class="view-inputs" route="^/styleguide/inputs/(.*)"></sc-view>
 
 		<sc-router></sc-router>
 
